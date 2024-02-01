@@ -11,7 +11,7 @@ export const routes: Routes = [
   { path: "", component: LandingPageComponent },
   {
     path: "qualifications",
-    title: "Fähigkeiten",
+    title: "Qualifikationen",
     component: QualificationsComponent,
     canActivate: [authGuardGuard],
   },

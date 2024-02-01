@@ -19,7 +19,7 @@
   <div class="card-footer text-body-secondary">
 
     <div >
-      <h5 class="card-title">Fähigkeiten</h5>
+      <h5 class="card-title">Fertigkeiten</h5>
       <ul>
         <li *ngFor="let skills of employee?.skillSet">{{ skills.skill }}</li>
       </ul>
@@ -36,7 +36,7 @@
         <h5 class="modal-title" id="deleteModalLabel">Mitarbeiter löschen</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="employee">
         Sind Sie sicher, dass Sie {{ employee?.firstName }} {{ employee?.lastName }} löschen möchten?
       </div>
       <div class="modal-footer">

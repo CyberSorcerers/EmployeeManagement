@@ -33,13 +33,17 @@ export class EmployeeListComponent implements OnInit{
       this.filteredEmployeeList = this.employeeList;
       this.initializePaginator();
       return;
-    } else if (this.filteredEmployeeList) {
+    } else {
       let filteredList = this.employeeList.filter((employee) => {
         switch(this.filterOptions) {
           case 'name':
             return employee.firstName?.toLowerCase().includes(text.toLowerCase()) || employee.lastName?.toLowerCase().includes(text.toLowerCase());
           case 'skill':
             return employee.skillSet && employee.skillSet.some(skillObj => skillObj.skill.toLowerCase().includes(text.toLowerCase()));
+          case 'address':
+            return employee.street?.toLowerCase().includes(text.toLowerCase()) ||
+              employee.city?.toLowerCase().includes(text.toLowerCase()) ||
+              employee.postcode?.toLowerCase().includes(text.toLowerCase());
           default:
             return false;
         }

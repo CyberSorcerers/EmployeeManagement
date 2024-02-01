@@ -6,7 +6,8 @@
         <label class="input-group-text" for="filterOption">Filter</label>
         <select id="filterOption" class="form-control" [(ngModel)]="filterOptions" (change)="updateSelectedIndex($event)" [ngModelOptions]="{standalone: true}" name="option">
           <option value="name" selected="selected">Name</option>
-          <option value="skill">Fähigkeiten</option>
+          <option value="skill">Fertigkeiten</option>
+          <option value="address">Adresse</option>
         </select>
       </div>
 

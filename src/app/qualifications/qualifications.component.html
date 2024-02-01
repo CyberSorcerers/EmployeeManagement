@@ -1,13 +1,13 @@
-<h1>Qualification</h1>
-<div class="d-flex justify-content-end my-4">
-  <input type="text" placeholder="Filter by skill" [(ngModel)]="searchText" />
-  <button disabled class="btn btn-info m-1">Filter Skill</button>
+<h1>Qualifikationen</h1>
+<div class="input-group d-flex justify-content-end">
+  <input type="text" class="form-control" placeholder="Fertigkeit Filtern..." [(ngModel)]="searchText" />
+  <button class="btn btn-outline-secondary">Filtern</button>
 </div>
 <table class="table m-2">
   <thead>
     <tr>
-      <th scope="col">id</th>
-      <th scope="col">Skillset Name</th>
+      <th scope="col">Id</th>
+      <th scope="col">Fertigkeit</th>
     </tr>
   </thead>
   <tbody>
@@ -18,25 +18,23 @@
         {{ quali.id }}
       </th>
       <td>{{ quali.skill }}</td>
-      <td>
+      <td class="flex justify-content-end text-end">
         <button
-          class="btn btn-primary"
+          class="btn btn-secondary mx-1"
           data-bs-toggle="modal"
           data-bs-target="#editModal"
           (click)="handleProps(quali.id, quali.skill)"
         >
-          Edit
+          <i class="bi bi-pencil-square"></i>
         </button>
-      </td>
-      <td>
         <button
           type="button"
-          class="btn btn-secondary"
+          class="btn btn-danger"
           data-bs-toggle="modal"
           data-bs-target="#deleteModal"
           (click)="handleProps(quali.id, quali.skill)"
         >
-          Delete
+          <i class="bi bi-x-square"></i>
         </button>
       </td>
     </tr>
@@ -56,20 +54,20 @@
       </div>
 
       <div class="modal-body">
-        <input type="text" [value]="skillProp" #box />
+        <input type="text" class="form-control" [value]="skillProp" #box />
       </div>
 
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Abbrechen
+        </button>
         <button
           type="button"
-          class="btn btn-light"
+          class="btn btn-success"
           data-bs-dismiss="modal"
           (click)="handleSave(idProp, box.value)"
         >
-          Save Changes
-        </button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-          Close
+          Speichern
         </button>
       </div>
     </div>
@@ -86,7 +84,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteModalLabel">Are you Sure ?</h1>
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Sind Sie sicher?</h1>
         <button
           type="button"
           class="btn-close"
@@ -95,19 +93,19 @@
         ></button>
       </div>
       <div class="modal-body">
-        this Action will delete all the Skills from Employees
+        Diese Aktion löscht alle Fertigkeiten von Mitarbeitern
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cancel
+          Abbrechen
         </button>
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-danger"
           data-bs-dismiss="modal"
           (click)="deleteQualification(idProp, skillProp)"
         >
-          Confirm Delete
+          Löschen
         </button>
       </div>
     </div>
@@ -120,7 +118,7 @@
   >
     <div class="col-6 text-center">
       <label for="skillSet"
-        ><h2 class="text-center">adding Qualification</h2></label
+        ><h2 class="text-center">Fertigkeit hinzufügen</h2></label
       >
       <input
         class="form-control"
@@ -129,6 +127,6 @@
         formControlName="skillSet"
       />
     </div>
-    <button class="btn btn-primary m-2" type="submit">Add and Save</button>
+    <button class="btn btn-success m-2" type="submit">Hinzufügen und Speichern</button>
   </div>
 </form>
