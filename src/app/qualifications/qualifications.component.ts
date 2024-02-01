@@ -1,8 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { DataRequest } from "../dataRequest.service";
 import { Qualification } from "../Qualification";
-import { Observable } from "rxjs";
+import {map, Observable} from "rxjs";
 import {
   FormControl,
   FormGroup,
@@ -19,7 +19,7 @@ import { Router } from "@angular/router";
   templateUrl: "./qualifications.component.html",
   styleUrl: "./qualifications.component.css",
 })
-export class QualificationsComponent {
+export class QualificationsComponent implements OnInit{
   searchText = "";
   skillProp = "";
   idProp: number = -1;
@@ -30,7 +30,7 @@ export class QualificationsComponent {
   constructor(private reqService: DataRequest, private router: Router) {}
 
   ngOnInit() {
-    this.qualifications$ = this.reqService.getQualifications();
+    this.getQualifications();
   }
   handleNav(id: number) {
     this.reqService.searchEmployee$.next(id);
@@ -57,7 +57,7 @@ export class QualificationsComponent {
     if (id) {
       this.reqService.updateQualification(id, skill).subscribe(() => {
         // refresh the qualifications$ observable
-        this.qualifications$ = this.reqService.getQualifications();
+        this.getQualifications();
       });
     }
   }
@@ -70,5 +70,17 @@ export class QualificationsComponent {
           this.qualifications$ = this.reqService.getQualifications();
         });
     }
+  }
+
+  getQualifications() {
+    this.qualifications$ = this.reqService.getQualifications().pipe(
+      map(qualifications => qualifications.sort((a, b) => {
+        if (a.id && b.id) {
+          return a.id - b.id;
+        } else {
+          return 0;
+        }
+      }))
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ActivatedRoute} from "@angular/router";
 import {DataRequest} from "../dataRequest.service";
@@ -14,10 +14,12 @@ import {Router} from "@angular/router";
   styleUrl: './employee-detail.component.css'
 })
 export class EmployeeDetailComponent implements OnInit{
+
+  route: ActivatedRoute = inject(ActivatedRoute);
   employee!: Employee;
 
 
-  constructor(private reqService: DataRequest, private route: ActivatedRoute, private router: Router) {
+  constructor(private reqService: DataRequest, private router: Router) {
   }
 
   ngOnInit():void {
