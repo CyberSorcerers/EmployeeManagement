@@ -1,0 +1,99 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <div>Neuer Mitarbeiter</div>
+    <div class="d-flex">
+      <button type="button" class="btn btn-lg btn-dark py-2 mx-1" (click)="goBack()">
+        <i class="bi bi-x-square"></i>
+      </button>
+    </div>
+    <div>
+      <label class="input-group-text" for="firstname">Vorname</label>
+      <input type="text" id="firstname" [(ngModel)]=employee.firstName>
+    </div>
+    <div>
+      <label class="input-group-text" for="lastname">Nachname</label>
+      <input type="text" id="lastname" [(ngModel)]=employee.lastName>
+    </div>
+    <div>
+      <label class="input-group-text" for="street">Straße + Hausnummer</label>
+      <input type="text" id="street" [(ngModel)]=employee.street>
+    </div>
+    <div>
+      <label class="input-group-text" for="postcode">Postleitzahl</label>
+      <input type="text" id="postcode" [(ngModel)]=employee.postcode>
+    </div>
+    <div>
+      <label class="input-group-text" for="city">Stadt</label>
+      <input type="text" id="city" [(ngModel)]=employee.city>
+    </div>
+    <div>
+      <label class="input-group-text" for="phone">Telefon</label>
+      <input type="text" id="phone" [(ngModel)]=employee.phone>
+    </div>
+  </div>
+  <div>
+    <h1>Skillset</h1>
+    <table class="table m-2">
+      <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Skillset</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for ( quali of skillset | async; track
+          quali.id ) {
+          <tr class="border-top">
+            <th scope="row" class="idSearch">
+              {{ quali.id }}
+            </th>
+            <td>{{ quali.skill }}</td>
+            <td class="flex justify-content-end text-end">
+              <button
+                class="btn btn-secondary mx-1"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+                (click)="addQualification(quali)"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <h1>Hinzugefügte Skillsets</h1>
+    <table class="table m-2">
+      <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Skillset</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for ( quali of qualifications$ | async; track
+          quali.id ) {
+          <tr class="border-top">
+            <th scope="row" class="idSearch">
+              {{ quali.id }}
+            </th>
+            <td>{{ quali.skill }}</td>
+            <td class="flex justify-content-end text-end">
+              <button
+                class="btn btn-secondary mx-1"
+                data-bs-toggle="modal"
+                data-bs-target="#editModal"
+                (click)="removeQualification(quali)"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-lg btn-dark py-2 mx-1" (click)="updateEmployee()">
+      Update
+    </button>
+  </div>
+</div>

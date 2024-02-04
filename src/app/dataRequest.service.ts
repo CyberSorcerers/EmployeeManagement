@@ -104,4 +104,29 @@ export class DataRequest {
       withCredentials: true,
     });
   }
+
+  createEmployee(firstName: string, lastName: string, street: string, postcode: string, city: string, phone: string, skillSet: { skill: Qualification}[]){
+    return this.http.post<any>(`/backend/employees`, {
+       lastName: lastName,
+       firstName: firstName,
+       street: street,
+       postcode: postcode,
+       city: city,
+       phone: phone,
+       skillSet: skillSet
+    })
+  }
+
+  updateEmployee(id: number, firstName?: string, lastName?: string, street?: string, postcode?: string, city?: string, phone?: string, skillSet?: { skill: Qualification}[]){
+    return this.http.put<any>(`/backend/employees/${id}`, {
+      lastName: lastName,
+      firstName: firstName,
+      street: street,
+      postcode: postcode,
+      city: city,
+      phone: phone,
+      skillSet: skillSet
+    })
+  }
+
 }
