@@ -1,0 +1,73 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="!isAddMode">
+    <h1>Bearbeiten</h1>
+  </div>
+  <div *ngIf="isAddMode">
+    <h1>Neu erstellen</h1>
+  </div>
+
+  <div class="input-group mb-2">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Vorname"
+      formControlName="firstName"
+    />
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nachname"
+      formControlName="lastName"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Telefonnummer"
+      formControlName="phone"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Straße"
+      formControlName="street"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="PLZ"
+      formControlName="postcode"
+    />
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Ort"
+      formControlName="city"
+    />
+  </div>
+
+  <div formGroupName="skills" *ngIf="qualifications.length > 0">
+    <div class="input-group mb-2" *ngFor="let quali of qualifications">
+      <div class="input-group-text">
+        <input
+          class="form-check-input mt-0"
+          type="checkbox"
+          [formControlName]="quali.id.toString()"
+        />
+      </div>
+      <input type="text" class="form-control" value="{{ quali.skill }}" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" [disabled]="loading" class="btn btn-success">
+      <span *ngIf="isAddMode">Erstellen</span>
+      <span *ngIf="!isAddMode">Aktualisieren</span>
+    </button>
+  </div>
+</form>

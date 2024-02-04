@@ -2,46 +2,88 @@
   <div class="card-header d-flex justify-content-between align-items-center">
     <div>Mitarbeiter Informationen</div>
     <div class="d-flex">
-      <button type="button" class="btn btn-lg btn-dark py-2" (click)="editEmployee()">
+      <button
+        type="button"
+        class="btn btn-lg btn-dark py-2"
+        (click)="editEmployee()"
+      >
         <i class="bi bi-pencil-square"></i>
       </button>
-      <button type="button" class="btn btn-lg btn-dark py-2 mx-1" (click)="goBack()">
+      <button
+        type="button"
+        class="btn btn-lg btn-dark py-2 mx-1"
+        (click)="goBack()"
+      >
         <i class="bi bi-x-square"></i>
       </button>
     </div>
   </div>
 
   <div class="card-body">
-    <h5 class="card-title">{{ employee?.firstName }} {{ employee?.lastName }} - <i class="bi bi-person-vcard"></i> {{ employee?.id }}</h5>
+    <h5 class="card-title">
+      {{ employee?.firstName }} {{ employee?.lastName }} -
+      <i class="bi bi-person-vcard"></i> {{ employee?.id }}
+    </h5>
     <p><i class="bi bi-telephone"></i> {{ employee?.phone }}</p>
-    <p class="card-text">{{ employee?.street }},<br /> {{ employee?.postcode }}, {{ employee?.city }}</p>
+    <p class="card-text">
+      {{ employee?.street }},<br />
+      {{ employee?.postcode }}, {{ employee?.city }}
+    </p>
   </div>
   <div class="card-footer text-body-secondary">
-
-    <div >
+    <div>
       <h5 class="card-title">Fertigkeiten</h5>
       <ul>
         <li *ngFor="let skills of employee?.skillSet">{{ skills.skill }}</li>
       </ul>
     </div>
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Löschen</button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteModal"
+    >
+      Löschen
+    </button>
   </div>
 </div>
 
 <!-- Bootstrap Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteModalLabel">Mitarbeiter löschen</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body" *ngIf="employee">
-        Sind Sie sicher, dass Sie {{ employee?.firstName }} {{ employee?.lastName }} löschen möchten?
+        Sind Sie sicher, dass Sie {{ employee?.firstName }}
+        {{ employee?.lastName }} löschen möchten?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-        <button type="button" class="btn btn-danger" (click)="deleteEmployee()">Löschen</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Abbrechen
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#deleteModal"
+          (click)="deleteEmployee()"
+        >
+          Löschen
+        </button>
       </div>
     </div>
   </div>
