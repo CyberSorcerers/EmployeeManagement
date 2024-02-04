@@ -29,6 +29,28 @@ export class DataRequest {
     let val = this.http.get<any>("/backend/employees");
     return val;
   }
+  getEmployeesById(id: string | null) {
+    return this.http.get<Employee>("/backend/employees/" + id, {
+      withCredentials: true,
+    });
+  }
+  deleteEmployee(id: number | undefined) {
+    return this.http.delete("/backend/employees/" + id, {
+      withCredentials: true,
+    });
+  }
+  createEmployee(employee: Employee) {
+    return this.http.post("/backend/employees", employee, {
+      withCredentials: true,
+    });
+  }
+  updateEmployee(id:number | undefined, employee: Employee) {
+    return this.http.put("/backend/employees/" + id, employee, {
+      withCredentials: true,
+    });
+  }
+
+
   getQualifications() {
     return this.http.get<Qualification[]>("/backend/qualifications");
   }
@@ -91,17 +113,6 @@ export class DataRequest {
     return this.http.delete(`/backend/employees/${id}/qualifications`, {
       body,
       headers,
-    });
-  }
-  getEmployeesById(id: string | null) {
-    return this.http.get<Employee>("/backend/employees/" + id, {
-      withCredentials: true,
-    });
-  }
-
-  deleteEmployee(id: number | undefined) {
-    return this.http.delete("/backend/employees/" + id, {
-      withCredentials: true,
     });
   }
 }
