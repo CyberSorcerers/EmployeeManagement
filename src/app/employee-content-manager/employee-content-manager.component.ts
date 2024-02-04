@@ -116,4 +116,8 @@ export class EmployeeContentManagerComponent implements OnInit {
     const control = new FormControl(skill, Validators.required);
     (this.employeeForm?.get("skills") as FormGroup).addControl(skill, control);
   }
+
+  goBack() {
+    this.router.navigate(["/employees"]);
+  }
 }
