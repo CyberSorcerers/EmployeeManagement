@@ -17,12 +17,13 @@ import {AppFilterPipe} from "../app-filter.pipe";
 })
 export class EmployeeEditComponent implements OnInit {
   qualifications$: Observable<Qualification[]> = new Observable();
-  skillset: {skill: Qualification}[];
+  skillset: number[];
   route: ActivatedRoute = inject(ActivatedRoute);
   employee!: Employee;
 
   constructor(private reqService: DataRequest, private router: Router) {
     this.skillset = [];
+
   }
   goBack() {
     this.router.navigate(['/employees/details', this.employee.id]);
@@ -34,6 +35,11 @@ export class EmployeeEditComponent implements OnInit {
     this.reqService.getEmployeesById(id).subscribe((data) => {
       this.employee = data;
     })
+    if(this.employee.skillSet) {
+      this.skillset = this.employee.skillSet?.map(skill => {
+        return skill.id
+      });
+    }
   }
 
   updateEmployee(){
@@ -41,9 +47,18 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   addQualification(quali: Qualification) {
+    if (!this.skillset.includes(quali.id)) {
+      this.skillset.push(quali.id);
+    }
+  }
 
-
-
+  removeQualification(quali: Qualification){
+    if (this.skillset.includes(quali.id)){
+      const index = this.skillset.indexOf(quali.id, 0);
+      if (index > -1) {
+        this.skillset.splice(index, 1);
+      }
+    }
   }
 
   getQualifications() {

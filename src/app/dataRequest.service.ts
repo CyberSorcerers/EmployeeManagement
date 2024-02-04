@@ -105,7 +105,7 @@ export class DataRequest {
     });
   }
 
-  createEmployee(firstName: string, lastName: string, street: string, postcode: string, city: string, phone: string, skillSet: { skill: Qualification}[]){
+  createEmployee(firstName: string, lastName: string, street: string, postcode: string, city: string, phone: string, skillSet: number[]){
     return this.http.post<any>(`/backend/employees`, {
        lastName: lastName,
        firstName: firstName,
@@ -117,7 +117,7 @@ export class DataRequest {
     })
   }
 
-  updateEmployee(id: number, firstName?: string, lastName?: string, street?: string, postcode?: string, city?: string, phone?: string, skillSet?: { skill: Qualification}[]){
+  updateEmployee(id: number, firstName?: string, lastName?: string, street?: string, postcode?: string, city?: string, phone?: string, skillSet?:  number[]){
     return this.http.put<any>(`/backend/employees/${id}`, {
       lastName: lastName,
       firstName: firstName,

@@ -17,7 +17,7 @@ import {AppFilterPipe} from "../app-filter.pipe";
 })
 export class EmployeeCreateComponent implements OnInit {
   qualifications$: Observable<Qualification[]> = new Observable();
-  skillset: {skill: Qualification}[];
+  skillset:  number[];
 
 
   constructor(private reqService: DataRequest, private router: Router) {
@@ -36,9 +36,18 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
   addQualification(quali: Qualification) {
-    if (this.skillset
+    if (!this.skillset.includes(quali.id)){
+      this.skillset.push(quali.id);
+    }
+  }
 
-
+  removeQualification(quali: Qualification){
+    if (this.skillset.includes(quali.id)){
+      const index = this.skillset.indexOf(quali.id, 0);
+      if (index > -1) {
+        this.skillset.splice(index, 1);
+      }
+    }
   }
 
   getQualifications() {
