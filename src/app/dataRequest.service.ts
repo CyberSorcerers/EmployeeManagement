@@ -29,7 +29,7 @@ export class DataRequest {
     let val = this.http.get<any>("/backend/employees");
     return val;
   }
-  getEmployeesById(id: string | null) {
+  getEmployeesById(id: number | string) {
     return this.http.get<Employee>("/backend/employees/" + id, {
       withCredentials: true,
     });
@@ -44,12 +44,11 @@ export class DataRequest {
       withCredentials: true,
     });
   }
-  updateEmployee(id:number | undefined, employee: Employee) {
+  updateEmployee(id: number | undefined, employee: Employee) {
     return this.http.put("/backend/employees/" + id, employee, {
       withCredentials: true,
     });
   }
-
 
   getQualifications() {
     return this.http.get<Qualification[]>("/backend/qualifications");
