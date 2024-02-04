@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EmployeeListContentComponent } from "../employee-list-content/employee-list-content.component";
 import { Employee } from "../Employee";
 import { Router } from "@angular/router";
+import {LocalStorageService} from "../local-storage.service";
 
 @Component({
   selector: "app-employee-list",
@@ -25,10 +26,12 @@ export class EmployeeListComponent implements OnInit {
   filterOptions: string = "name";
 
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalPages: number = 0;
-  constructor(private reqService: DataRequest, private router: Router) {}
+  constructor(private reqService: DataRequest, private router: Router, private localStorageService: LocalStorageService) {
+  }
   ngOnInit(): void {
+    this.filterOptions = this.localStorageService.getItem("filterOptions") || "name";
     this.getEmployees();
   }
   filterResults(text: string) {
@@ -66,8 +69,8 @@ export class EmployeeListComponent implements OnInit {
   }
 
   private getEmployees() {
-    this.reqService.getEmployees().subscribe((data) => {
-      this.employeeList = data;
+    this.reqService.getEmployees().subscribe((data: Employee[]) => {
+      this.employeeList = data.sort((a: Employee, b: Employee) => a.id - b.id);
       this.filteredEmployeeList = this.employeeList;
       this.initializePaginator();
       this.updatePage();
@@ -107,5 +110,6 @@ export class EmployeeListComponent implements OnInit {
 
   updateSelectedIndex(event: any) {
     this.filterOptions = event.target.value;
+    this.localStorageService.setItem("filterOptions", this.filterOptions);
   }
 }
